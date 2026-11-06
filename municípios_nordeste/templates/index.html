@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Municípios</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+
+<body>
+    <header class="topo">
+        <div class="topo-conteudo">
+            <div>
+                <h1>Gerenciamento de Municípios</h1>
+                <p>Sistema de cadastro dos municípios da região Nordeste</p>
+            </div>
+
+            <a href="/municipios/download" class="botao-download">
+                <span>↓</span> Baixar JSON
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="painel-layout">
+
+            <!-- FORMULÁRIO -->
+            <section class="cartao formulario-cartao">
+                <div class="titulo-secao">
+                    <div>
+                        <h2 id="tituloFormulario">Cadastrar município</h2>
+                        <p>Preencha os dados para adicionar um município.</p>
+                    </div>
+                    <span class="icone-secao">＋</span>
+                </div>
+
+                <form id="formMunicipio">
+                    <div class="campo">
+                        <label for="nome">Nome do município</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Ex.: Recife"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="id_ibge">Código IBGE</label>
+                        <input
+                            type="number"
+                            id="id_ibge"
+                            name="id_ibge"
+                            placeholder="Ex.: 2611606"
+                            min="1"
+                            required
+                        >
+                    </div>
+
+                    <div class="linha-campos">
+                        <div class="campo">
+                            <label for="estado">Estado</label>
+                            <input
+                                type="text"
+                                id="estado"
+                                name="estado"
+                                placeholder="Ex.: Pernambuco"
+                                required
+                            >
+                        </div>
+
+                        <div class="campo campo-uf">
+                            <label for="sigla_uf">UF</label>
+                            <select id="sigla_uf" name="sigla_uf" required>
+                                <option value="">UF</option>
+                                <option value="AL">AL</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="MA">MA</option>
+                                <option value="PB">PB</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RN">RN</option>
+                                <option value="SE">SE</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="linha-campos">
+                        <div class="campo">
+                            <label for="capital">É capital?</label>
+                            <select id="capital" name="capital" required>
+                                <option value="">Selecione</option>
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="populacao_estimada">População estimada</label>
+                            <input
+                                type="number"
+                                id="populacao_estimada"
+                                name="populacao_estimada"
+                                placeholder="Ex.: 500000"
+                                min="0"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="botoes-formulario">
+                        <button type="submit" id="btnSalvar" class="botao-principal">
+                            Cadastrar município
+                        </button>
+
+                        <button
+                            type="button"
+                            id="btnCancelar"
+                            class="botao-cancelar"
+                            hidden
+                        >
+                            Cancelar edição
+                        </button>
+                    </div>
+
+                    <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <!-- LISTA DE MUNICÍPIOS -->
+            <section class="cartao lista-cartao">
+                <div class="titulo-secao titulo-lista">
+                    <div>
+                        <h2>Municípios cadastrados</h2>
+                        <p>Consulte, edite ou remova os registros.</p>
+                    </div>
+
+                    <span class="contador">
+                        <strong id="totalMunicipios">0</strong>
+                        <small>registros</small>
+                    </span>
+                </div>
+
+                <div class="filtros">
+                    <div class="campo busca-campo">
+                        <label for="buscaNome">Pesquisar município</label>
+                        <input
+                            type="search"
+                            id="buscaNome"
+                            placeholder="Digite o nome..."
+                        >
+                    </div>
+
+                    <div class="campo filtro-campo">
+                        <label for="filtroUF">Filtrar por UF</label>
+                        <select id="filtroUF">
+                            <option value="">Todos os estados</option>
+                            <option value="AL">Alagoas (AL)</option>
+                            <option value="BA">Bahia (BA)</option>
+                            <option value="CE">Ceará (CE)</option>
+                            <option value="MA">Maranhão (MA)</option>
+                            <option value="PB">Paraíba (PB)</option>
+                            <option value="PE">Pernambuco (PE)</option>
+                            <option value="PI">Piauí (PI)</option>
+                            <option value="RN">Rio Grande do Norte (RN)</option>
+                            <option value="SE">Sergipe (SE)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Município</th>
+                                <th>UF</th>
+                                <th>Capital</th>
+                                <th>População</th>
+                                <th>Código IBGE</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="corpoTabela">
+                            <tr>
+                                <td colspan="6" class="tabela-vazia">
+                                    Carregando municípios...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="rodape-tabela">
+                    Os dados são armazenados temporariamente durante a execução do servidor.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>Projeto acadêmico — Gerenciamento de Municípios do Nordeste</p>
+    </footer>
+</body>
+</html>
