@@ -8,15 +8,17 @@ app = Flask(__name__)
 # DICIONÁRIO DE MUNICÍPIOS DO NORDESTE
 # ==========================================
 
+
 municipios_nordeste_dataset = {
     "metadados": {
         "regiao": "Nordeste",
         "pais": "Brasil",
-        "total_municipios": 2,
-        "fonte_dados_populacao": "IBGE"
+        "total_municipios": 30,
+        "fonte_dados_populacao": "IBGE - Censo 2022"
     },
 
     "municipios": {
+        # CEARÁ
         "Fortaleza": {
             "id_ibge": 2304400,
             "estado": "Ceará",
@@ -24,13 +26,224 @@ municipios_nordeste_dataset = {
             "capital": True,
             "populacao_estimada": 2582360
         },
+        "Caucaia": {
+            "id_ibge": 2303709,
+            "estado": "Ceará",
+            "sigla_uf": "CE",
+            "capital": False,
+            "populacao_estimada": 355679
+        },
+        "Juazeiro do Norte": {
+            "id_ibge": 2307304,
+            "estado": "Ceará",
+            "sigla_uf": "CE",
+            "capital": False,
+            "populacao_estimada": 286120
+        },
+        "Maracanaú": {
+            "id_ibge": 2307650,
+            "estado": "Ceará",
+            "sigla_uf": "CE",
+            "capital": False,
+            "populacao_estimada": 234509
+        },
 
+        # BAHIA
         "Salvador": {
             "id_ibge": 2927408,
             "estado": "Bahia",
             "sigla_uf": "BA",
             "capital": True,
             "populacao_estimada": 2559945
+        },
+        "Feira de Santana": {
+            "id_ibge": 2910800,
+            "estado": "Bahia",
+            "sigla_uf": "BA",
+            "capital": False,
+            "populacao_estimada": 616279
+        },
+        "Vitória da Conquista": {
+            "id_ibge": 2933307,
+            "estado": "Bahia",
+            "sigla_uf": "BA",
+            "capital": False,
+            "populacao_estimada": 370868
+        },
+        "Camaçari": {
+            "id_ibge": 2905701,
+            "estado": "Bahia",
+            "sigla_uf": "BA",
+            "capital": False,
+            "populacao_estimada": 300372
+        },
+
+        # ALAGOAS
+        "Maceió": {
+            "id_ibge": 2704302,
+            "estado": "Alagoas",
+            "sigla_uf": "AL",
+            "capital": True,
+            "populacao_estimada": 957916
+        },
+        "Arapiraca": {
+            "id_ibge": 2700300,
+            "estado": "Alagoas",
+            "sigla_uf": "AL",
+            "capital": False,
+            "populacao_estimada": 234696
+        },
+        "Rio Largo": {
+            "id_ibge": 2707701,
+            "estado": "Alagoas",
+            "sigla_uf": "AL",
+            "capital": False,
+            "populacao_estimada": 93927
+        },
+
+        # MARANHÃO
+        "São Luís": {
+            "id_ibge": 2111300,
+            "estado": "Maranhão",
+            "sigla_uf": "MA",
+            "capital": True,
+            "populacao_estimada": 1037775
+        },
+        "Imperatriz": {
+            "id_ibge": 2105302,
+            "estado": "Maranhão",
+            "sigla_uf": "MA",
+            "capital": False,
+            "populacao_estimada": 273110
+        },
+        "Timon": {
+            "id_ibge": 2112209,
+            "estado": "Maranhão",
+            "sigla_uf": "MA",
+            "capital": False,
+            "populacao_estimada": 174465
+        },
+
+        # PARAÍBA
+        "João Pessoa": {
+            "id_ibge": 2507507,
+            "estado": "Paraíba",
+            "sigla_uf": "PB",
+            "capital": True,
+            "populacao_estimada": 833932
+        },
+        "Campina Grande": {
+            "id_ibge": 2504009,
+            "estado": "Paraíba",
+            "sigla_uf": "PB",
+            "capital": False,
+            "populacao_estimada": 419379
+        },
+        "Santa Rita": {
+            "id_ibge": 2513703,
+            "estado": "Paraíba",
+            "sigla_uf": "PB",
+            "capital": False,
+            "populacao_estimada": 149910
+        },
+
+        # PERNAMBUCO
+        "Recife": {
+            "id_ibge": 2611606,
+            "estado": "Pernambuco",
+            "sigla_uf": "PE",
+            "capital": True,
+            "populacao_estimada": 1488920
+        },
+        "Jaboatão dos Guararapes": {
+            "id_ibge": 2607901,
+            "estado": "Pernambuco",
+            "sigla_uf": "PE",
+            "capital": False,
+            "populacao_estimada": 643759
+        },
+        "Caruaru": {
+            "id_ibge": 2604106,
+            "estado": "Pernambuco",
+            "sigla_uf": "PE",
+            "capital": False,
+            "populacao_estimada": 378052
+        },
+
+        # PIAUÍ
+        "Teresina": {
+            "id_ibge": 2211001,
+            "estado": "Piauí",
+            "sigla_uf": "PI",
+            "capital": True,
+            "populacao_estimada": 866300
+        },
+        "Parnaíba": {
+            "id_ibge": 2207702,
+            "estado": "Piauí",
+            "sigla_uf": "PI",
+            "capital": False,
+            "populacao_estimada": 162159
+        },
+        "Picos": {
+            "id_ibge": 2208007,
+            "estado": "Piauí",
+            "sigla_uf": "PI",
+            "capital": False,
+            "populacao_estimada": 83090
+        },
+
+        # RIO GRANDE DO NORTE
+        "Natal": {
+            "id_ibge": 2408102,
+            "estado": "Rio Grande do Norte",
+            "sigla_uf": "RN",
+            "capital": True,
+            "populacao_estimada": 751300
+        },
+        "Mossoró": {
+            "id_ibge": 2408003,
+            "estado": "Rio Grande do Norte",
+            "sigla_uf": "RN",
+            "capital": False,
+            "populacao_estimada": 264577
+        },
+        "Parnamirim": {
+            "id_ibge": 2403251,
+            "estado": "Rio Grande do Norte",
+            "sigla_uf": "RN",
+            "capital": False,
+            "populacao_estimada": 252716
+        },
+
+        # SERGIPE
+        "Aracaju": {
+            "id_ibge": 2800308,
+            "estado": "Sergipe",
+            "sigla_uf": "SE",
+            "capital": True,
+            "populacao_estimada": 602757
+        },
+        "Nossa Senhora do Socorro": {
+            "id_ibge": 2804805,
+            "estado": "Sergipe",
+            "sigla_uf": "SE",
+            "capital": False,
+            "populacao_estimada": 192330
+        },
+        "Lagarto": {
+            "id_ibge": 2803502,
+            "estado": "Sergipe",
+            "sigla_uf": "SE",
+            "capital": False,
+            "populacao_estimada": 101579
+        },
+        "Itabaiana": {
+            "id_ibge": 2802906,
+            "estado": "Sergipe",
+            "sigla_uf": "SE",
+            "capital": False,
+            "populacao_estimada": 103439
         }
     }
 }
